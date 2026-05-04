@@ -1,48 +1,37 @@
-This is a Kotlin Multiplatform project targeting Android, iOS, Desktop (JVM).
+# 📝 Notes KMP - AI Integrated Assistant
 
-* [/composeApp](./composeApp/src) is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - [commonMain](./composeApp/src/commonMain/kotlin) is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    the [iosMain](./composeApp/src/iosMain/kotlin) folder would be the right place for such calls.
-    Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./composeApp/src/jvmMain/kotlin)
-    folder is the appropriate location.
+Aplikasi catatan lintas platform (Kotlin Multiplatform) yang dilengkapi dengan fitur cerdas berbasis AI untuk merangkum konten catatan secara otomatis. Proyek ini merupakan bagian dari tugas praktikum pengembangan aplikasi mobile.
 
-* [/iosApp](./iosApp/iosApp) contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform,
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+## 🚀 Fitur Utama
+- **CRUD Catatan**: Menambah, membaca, memperbarui, dan menghapus catatan secara lokal.
+- **Pencarian Cepat**: Mencari catatan berdasarkan judul atau isi.
+- **AI Note Summarizer**: Fitur unggulan yang menggunakan **Google Gemini 2.5 Flash** untuk merangkum catatan panjang menjadi poin-poin singkat hanya dengan satu klik.
+- **Network Awareness**: Indikator status jaringan (Online/Offline) untuk memastikan fitur AI siap digunakan.
+- **Device Info**: Informasi perangkat yang ditampilkan di menu pengaturan.
 
-### Build and Run Android Application
+## 🛠️ Teknologi yang Digunakan
+- **Kotlin Multiplatform (KMP)**: Shared logic antara platform Android dan iOS.
+- **Compose Multiplatform**: UI framework untuk tampilan yang konsisten.
+- **SQLDelight**: Local database dengan type-safe SQL.
+- **Ktor Client**: Untuk komunikasi data dengan Google Gemini API.
+- **Koin**: Dependency Injection untuk manajemen service dan database.
+- **Google Gemini API (Generative AI)**: Model `gemini-2.5-flash` untuk pemrosesan teks.
 
-To build and run the development version of the Android app, use the run configuration from the run widget
-in your IDE’s toolbar or build it directly from the terminal:
-- on macOS/Linux
-  ```shell
-  ./gradlew :composeApp:assembleDebug
-  ```
-- on Windows
-  ```shell
-  .\gradlew.bat :composeApp:assembleDebug
-  ```
+## 🤖 Integrasi AI
+Fitur AI diimplementasikan melalui `GeminiService` yang terintegrasi dengan REST API Google. 
 
-### Build and Run Desktop (JVM) Application
+### Alur Kerja AI:
+1. User memasukkan konten catatan pada kolom "Isi Catatan".
+2. User menekan tombol **"Ringkas dengan AI"**.
+3. Aplikasi mengirimkan *prompt* khusus ke server Google: `"Tolong buatkan ringkasan singkat dalam bentuk poin-poin untuk catatan ini: [isi_catatan]"`.
+4. Respon JSON dari AI di-parsing menggunakan `Kotlinx Serialization`.
+5. Hasil ringkasan ditampilkan kembali ke user, menggantikan atau memperkaya catatan asli.
 
-To build and run the development version of the desktop app, use the run configuration from the run widget
-in your IDE’s toolbar or run it directly from the terminal:
-- on macOS/Linux
-  ```shell
-  ./gradlew :composeApp:run
-  ```
-- on Windows
-  ```shell
-  .\gradlew.bat :composeApp:run
-  ```
+## 📦 Cara Menjalankan
+1. Clone repositori ini.
+2. Dapatkan API Key dari [Google AI Studio](https://aistudio.google.com/).
+3. Masukkan API Key Anda pada file `GeminiService.kt`:
+   ```kotlin
+   private val apiKey = "YOUR_API_KEY_HERE"
 
-### Build and Run iOS Application
-
-To build and run the development version of the iOS app, use the run configuration from the run widget
-in your IDE’s toolbar or open the [/iosApp](./iosApp) directory in Xcode and run it from there.
-
----
-
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+## Screenshot
