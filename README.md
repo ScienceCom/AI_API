@@ -35,3 +35,6 @@ Fitur AI diimplementasikan melalui `GeminiService` yang terintegrasi dengan REST
    private val apiKey = "YOUR_API_KEY_HERE"
 
 ## Screenshot
+<img src="1.png" width="400" />
+<img src="2.png" width="400" />
+<img src="3.png" width="400" />
